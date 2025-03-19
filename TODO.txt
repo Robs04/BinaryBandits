@@ -1,0 +1,6 @@
+TODO:
+- Webpage interface
+- Voice to text in realtime
+- Keyword extraction from text
+- Analysis of big changes in the market and extraction of those (to prepare for calls)
+- 
