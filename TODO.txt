@@ -1,6 +1,22 @@
-TODO:
-- Webpage interface
-- Voice to text in realtime
-- Keyword extraction from text
+TODO unasigned:
+
+
+
+
+Robin:
 - Analysis of big changes in the market and extraction of those (to prepare for calls)
-- 
+
+
+
+Vale:
+- Keyword extraction from text
+
+
+
+Christian:
+- Webpage interface
+
+
+
+Orell:
+- Voice to text in realtime
