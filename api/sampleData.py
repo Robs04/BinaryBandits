@@ -1,75 +1,86 @@
 from models import *
 from datetime import datetime
 
-# Swiss stocks and options trades
-trade1 = Trade(datetime(2024, 1, 10), "Nestle N", 20, 108.5, "buy", 1.5)
-trade2 = Trade(datetime(2024, 2, 5), "Roche Hldg I", 10, 265.0, "buy", 2.0)
-trade3 = Trade(datetime(2024, 3, 15), "Cicor Technologie N", 15, 55.2, "sell", 1.8)
-trade4 = Trade(datetime(2024, 2, 28), "Sulzer N", 12, 80.0, "buy", 2.5)
-trade5 = Trade(datetime(2024, 3, 12), "Basilea Pharmaceu N", 25, 39.8, "buy", 2.2)
+from datetime import datetime
 
-# Sample options trades on Swiss stocks
-option_trade1 = Trade(datetime(2024, 1, 20), "Nestle 110C", 2, 5.80, "buy", 0.9)  # Call Option
-option_trade2 = Trade(datetime(2024, 2, 15), "Roche 250P", 1, 12.50, "buy", 1.1)  # Put Option
-option_trade3 = Trade(datetime(2024, 3, 5), "Cicor 60C", 3, 3.75, "sell", 0.8)  # Call Option
-option_trade4 = Trade(datetime(2024, 3, 10), "Sulzer 85P", 2, 4.30, "buy", 1.3)  # Put Option
-option_trade5 = Trade(datetime(2024, 3, 18), "Basilea 45C", 1, 7.00, "sell", 0.7)  # Call Option
+# Define stock sectors with Swiss stocks
+SECTORS = {
+    "Technology": ["ams-OSRAM Br", "Cicor Technologie N", "Sensirion H Rg-144A", "ALSO Holding N"],
+    "Healthcare": ["Roche Hldg I", "Basilea Pharmaceu N", "Santhera Pharm H Rg", "Medacta Grp Rg-Unty"],
+    "Financials": ["Cembra Money Bk N", "Helvetia Hldg Rg", "Adecco Group N"],
+    "Industrials": ["Interroll Hldg N", "Bucher Industries N", "OC Oerlikon N", "Sulzer N", "Implenia N"],
+    "Consumer Goods": ["Nestle N", "Lindt&Spruengli PS", "Lindt & Sp 2L PC Br", "CieFinRichemont N", "V-ZUG Hldg Rg"],
+}
 
-# Sample positions in Swiss stocks and options
-position1 = Position("Nestle N", "NESN.SW", 20, 108.5, 2200.0)
-position2 = Position("Roche Hldg I", "ROG.SW", 10, 265.0, 2700.0)
-position3 = Position("Cicor Technologie N", "CICN.SW", 15, 55.2, 800.0)
-position4 = Position("Sulzer N", "SUN.SW", 12, 80.0, 970.0)
-position5 = Position("Basilea Pharmaceu N", "BSLN.SW", 25, 39.8, 1050.0)
+# Generate trades for each sector
+def generate_trades(person_name, num_trades=20):
+    trades = []
+    for sector, stocks in SECTORS.items():
+        for i, stock in enumerate(stocks):
+            if len(trades) >= num_trades:
+                break
+            trade = Trade(
+                date=datetime(2024, 1, i + 5),
+                asset=stock,
+                amount=round(50 + i * 10),  # Random amount per stock
+                price=round(50 + i * 5 + (100 if sector == "Consumer Goods" else 0), 2),
+                trade_type="buy" if i % 2 == 0 else "sell",
+                fees=round(1 + i * 0.5, 2),
+            )
+            trades.append(trade)
+    return trades
 
-option_position1 = Position("Nestle Call Option", "Nestle 110C", 2, 5.80, 1150.0)
-option_position2 = Position("Roche Put Option", "Roche 250P", 1, 12.50, 1100.0)
-option_position3 = Position("Cicor Call Option", "Cicor 60C", 3, 3.75, 850.0)
-option_position4 = Position("Sulzer Put Option", "Sulzer 85P", 2, 4.30, 900.0)
-option_position5 = Position("Basilea Call Option", "Basilea 45C", 1, 7.00, 780.0)
+# Generate positions for each sector
+def generate_positions():
+    positions = []
+    for sector, stocks in SECTORS.items():
+        for i, stock in enumerate(stocks):
+            position = Position(
+                company=stock,
+                ticker=f"{stock[:3].upper()}.SW",
+                amount=round(500 + i * 20),
+                average_price=round(100 + i * 10, 2),
+                current_worth=round(1000000 + i * 50000, 2),
+            )
+            positions.append(position)
+    return positions
 
-# Sample trade histories
-trade_history1 = TradeHistory([trade1, trade3, option_trade1])
-trade_history2 = TradeHistory([trade2, trade4, option_trade2])
-trade_history3 = TradeHistory([trade5, trade1, option_trade3])
-trade_history4 = TradeHistory([trade3, trade4, option_trade4])
-trade_history5 = TradeHistory([trade2, trade5, option_trade5])
+# Create high-net-worth individuals
+person1 = Person(
+    "Hans", "Müller", 75_000_000,
+    trade_history=TradeHistory(generate_trades("Hans")),
+    goals=Goals(["Maintain capital growth", "Expand into European markets"]),
+    positions=Positions(generate_positions())
+)
 
-# Sample goals
-goals1 = Goals(["Retire at 50", "Achieve CHF 1M portfolio"])
-goals2 = Goals(["Generate passive income", "Invest in Swiss blue chips"])
-goals3 = Goals(["Diversify holdings", "Trade Swiss stock options successfully"])
-goals4 = Goals(["Trade full-time", "Invest in mid-cap Swiss companies"])
-goals5 = Goals(["Build a long-term portfolio", "Grow net worth to CHF 500K"])
+person2 = Person(
+    "Sophie", "Dupont", 62_500_000,
+    trade_history=TradeHistory(generate_trades("Sophie")),
+    goals=Goals(["Long-term dividend investing", "Philanthropic investments"]),
+    positions=Positions(generate_positions())
+)
 
-# Sample positions
-positions1 = Positions([position1, position2, option_position1])
-positions2 = Positions([position3, position4, option_position2])
-positions3 = Positions([position5, position1, option_position3])
-positions4 = Positions([position2, position3, option_position4])
-positions5 = Positions([position4, position5, option_position5])
-
-# Creating Person instances
-person1 = Person("John", "Doe", 250000, trade_history1, goals1, positions1)
-person2 = Person("Alice", "Smith", 150000, trade_history2, goals2, positions2)
-person3 = Person("Bob", "Johnson", 500000, trade_history3, goals3, positions3)
-person4 = Person("Emma", "Brown", 300000, trade_history4, goals4, positions4)
-person5 = Person("Charlie", "Davis", 200000, trade_history5, goals5, positions5)
+person3 = Person(
+    "Luca", "Rossi", 54_800_000,
+    trade_history=TradeHistory(generate_trades("Luca")),
+    goals=Goals(["Growth stocks & aggressive trading", "Sector diversification"]),
+    positions=Positions(generate_positions())
+)
 
 # Store persons in a list
-people = [person1, person2, person3, person4, person5]
+people = [person1, person2, person3]
 
 # Print sample data
 '''
 for person in people:
     print(f"Name: {person.first_name} {person.last_name}")
-    print(f"Net Worth: CHF {person.current_worth}")
+    print(f"Net Worth: CHF {person.current_worth:,}")
     print("Trade History:")
     for trade in person.trade_history.trades:
         print(f"  {trade.date.date()} - {trade.trade_type.upper()} {trade.amount} {trade.asset} at CHF {trade.price}")
     print("Goals:", ", ".join(person.goals.goals_list))
     print("Positions:")
     for pos in person.positions.holdings:
-        print(f"  {pos.company} ({pos.ticker}) - {pos.amount} units, Worth: CHF {pos.current_worth}")
+        print(f"  {pos.company} ({pos.ticker}) - {pos.amount} units, Worth: CHF {pos.current_worth:,}")
     print("-" * 50)
 '''
