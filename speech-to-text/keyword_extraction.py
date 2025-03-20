@@ -154,7 +154,7 @@ def prompt(keywords):
     response = requests.post(url)
     return response.json()
 
-def process_text(text):
+def process_text(text, socketio):
     important_nouns = extract_noun_phrases(text)
     match = [(item, get_best_match(item)) for item in important_nouns]
     for item in match: 
@@ -163,6 +163,7 @@ def process_text(text):
             unlcean_json = prompt(item[1])
             clean_json = process_financial_json(extract_item_from_tool_response(unlcean_json))
             print(clean_json)
+            socketio.emit('update_data', {'data': clean_json})
             #give data to front end
 
 

@@ -14,7 +14,7 @@ import parser
 
 r = sr.Recognizer()
 
-def record_text():
+def record_text(socket):
     # Loop in case of error
     while(1):
         try:
@@ -29,7 +29,7 @@ def record_text():
                 # Using google to recognize audio 
                 MyText = r.recognize_google(audio2)
 
-                keyword_extraction.process_text(MyText)
+                keyword_extraction.process_text(MyText, socket)
 
         except sr.RequestError as e:
             print("Could not request result: {0}".format(e) )
@@ -39,15 +39,8 @@ def record_text():
 
     return
 
-def output_text(text):
-    f = open("output.txt", "a")
-    f.write(text)
-    f.write("\n")
-    f.close()
-    return
 
-while(1):
-    text = record_text()
-    output_text(text)
+def execute_listen(socket):
+    while(1):
+        text = record_text(socket)
 
-    print("Wrote text")
