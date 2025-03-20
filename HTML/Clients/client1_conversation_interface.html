@@ -13,6 +13,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
         }
 
         h1 {
@@ -22,9 +23,11 @@
         }
 
         .back-button {
-            margin-bottom: 20px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
             padding: 10px 20px;
-            background-color: #DE3919;
+            background-color: #000000;
             color: white;
             text-decoration: none;
             border-radius: 10px;
@@ -32,25 +35,41 @@
         }
 
         .back-button:hover {
-            background-color: #c3301a;
+            background-color: #DE3919;
         }
 
         .conversation-container {
             display: flex;
+            flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
             align-items: stretch;
             margin-top: 20px;
+            width: 100%;
         }
 
-        .tab {
+        .half-width-tab {
             flex: 1;
             background-color: #fff;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin: 5px;
-            max-width: 30%;
+            min-width: 300px;
+            max-width: 45%;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .full-width-tab {
+            width: calc(90% + 70px);
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 5px;
             min-height: 300px;
             display: flex;
             flex-direction: column;
@@ -79,21 +98,21 @@
     <a href="../clients/client1.html" class="back-button">Back to Client 1 Overview</a>
     <h1>Client 1 - Conversation Interface</h1>
     <div class="conversation-container">
-        <div class="tab">
+        <div class="half-width-tab">
             <h2>Prediction</h2>
             <div class="tab-content">
                 <p class="dynamic-content">Predicted topics the client might want to discuss will be displayed here.</p>
             </div>
         </div>
 
-        <div class="tab">
+        <div class="half-width-tab">
             <h2>News</h2>
             <div class="tab-content">
                 <p class="dynamic-content">Latest market news and special reports will be displayed here.</p>
             </div>
         </div>
 
-        <div class="tab">
+        <div class="full-width-tab">
             <h2>Dynamic Info</h2>
             <div class="tab-content">
                 <p class="dynamic-content">Relevant data related to the conversation (e.g., Tesla stock info) will appear here.</p>
