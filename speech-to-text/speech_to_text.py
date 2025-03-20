@@ -6,7 +6,8 @@
 # Documentation: https://github.com/Uberi/speech_recognition/blob/master/reference/library-reference.rstpio
 import speech_recognition as sr
 import pyttsx3
-
+import keyword_extraction
+import parser
 # Each paragraph of spoken text gets written on a new line in the output.txt file
 # The idea is to extract the text from the output file line by line. 
 # Whenever a line is written the pointer wo which line is being fetched is incremented.
@@ -28,7 +29,7 @@ def record_text():
                 # Using google to recognize audio 
                 MyText = r.recognize_google(audio2)
 
-                return MyText
+                keyword_extraction.process_text(MyText)
 
         except sr.RequestError as e:
             print("Could not request result: {0}".format(e) )
