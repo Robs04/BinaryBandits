@@ -128,6 +128,9 @@ def get_best_match(phrase):
 
     # Get the asset name
     result = assets.get(best_match, "No relevant match found")
+
+    if score < 50:
+        return None
     
     # Return time component separately if found
     if time_quantity:
@@ -150,4 +153,18 @@ def prompt(keywords):
 
     response = requests.post(url)
     return response.json()
+
+def process_text(text):
+    important_nouns = extract_noun_phrases(text)
+    match = [(item, get_best_match(item)) for item in important_nouns]
+    for item in match: 
+        if 1: #ask if you want the data
+            print(item[0])
+            unlcean_json = prompt(item[1])
+            clean_json = process_financial_json(extract_item_from_tool_response(unlcean_json))
+            print(clean_json)
+            #give data to front end
+
+
+process_text("Tesla stock, google stock")
 
