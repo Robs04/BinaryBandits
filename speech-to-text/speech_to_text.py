@@ -35,12 +35,24 @@ def record_text(socket):
             print("Could not request result: {0}".format(e) )
         
         except sr.UnknownValueError:
-            print("Unknown error occured")
+            print("Gibberisch detected")
 
     return
 
+<<<<<<< HEAD
 
 def execute_listen(socket):
     while(1):
         text = record_text(socket)
 
+=======
+'''def output_text(text):
+    f = open("output.txt", "a")
+    f.write(text)
+    f.write("\n")
+    f.close()
+    return'''
+
+while(1):
+    text = record_text()
+>>>>>>> f49efc7dce38504226c14be3e8160c96201a9158

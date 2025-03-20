@@ -15,6 +15,7 @@ from rapidfuzz import process,fuzz
 import requests
 import pandas as pd
 from parser import *
+import plot
 
 
 
@@ -129,9 +130,7 @@ def get_best_match(phrase):
     # Get the asset name
     result = assets.get(best_match, "No relevant match found")
 
-    if score < 50:
-        return None
-    
+
     # Return time component separately if found
     if time_quantity:
         return f"{result} {time_quantity} {time_unit}"
@@ -156,11 +155,13 @@ def prompt(keywords):
 
 def process_text(text, socketio):
     important_nouns = extract_noun_phrases(text)
-    match = [(item, get_best_match(item)) for item in important_nouns]
+    match = [(item, best) for item in important_nouns if (best := get_best_match(item)) is not None]
     for item in match: 
         if 1: #ask if you want the data
             print(item[0])
+            #print(item[1])
             unlcean_json = prompt(item[1])
+<<<<<<< HEAD
             clean_json = process_financial_json(extract_item_from_tool_response(unlcean_json))
             print(clean_json)
             socketio.emit('update_data', {'data': clean_json})
@@ -168,4 +169,16 @@ def process_text(text, socketio):
 
 
 process_text("Tesla stock, google stock")
+=======
+            #print(unlcean_json)
+            return  process_financial_json(extract_item_from_tool_response(unlcean_json))
+>>>>>>> f49efc7dce38504226c14be3e8160c96201a9158
 
+df = process_text("tesla")
+plot.plot_stock_chart(
+    df["Date"].tolist(), 
+    df["Open"].tolist(), 
+    df["Close"].tolist(), 
+    df["High"].tolist(), 
+    df["Low"].tolist()
+)
