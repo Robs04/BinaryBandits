@@ -60,6 +60,7 @@ person5 = Person("Charlie", "Davis", 200000, trade_history5, goals5, positions5)
 people = [person1, person2, person3, person4, person5]
 
 # Print sample data
+'''
 for person in people:
     print(f"Name: {person.first_name} {person.last_name}")
     print(f"Net Worth: CHF {person.current_worth}")
@@ -71,3 +72,4 @@ for person in people:
     for pos in person.positions.holdings:
         print(f"  {pos.company} ({pos.ticker}) - {pos.amount} units, Worth: CHF {pos.current_worth}")
     print("-" * 50)
+'''
