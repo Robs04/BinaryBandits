@@ -5,21 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client 1 - Conversation Interface</title>
     <style>
+        :root {
+            --primary-color: #9945FF;
+            --secondary-color: #14F195;
+            --accent-color: #00C2FF;
+            --background-color: #000000;
+            --card-bg-color: #1E1E1E;
+            --text-color: #FFFFFF;
+            --header-color: #14F195;
+            --gradient-start: #9945FF;
+            --gradient-end: #14F195;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Inter', 'Arial', sans-serif;
+            background-color: var(--background-color);
             margin: 0;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
+            color: var(--text-color);
         }
 
         h1 {
             margin-bottom: 20px;
             font-size: 2.5em;
-            color: #333;
+            color: var(--text-color);
+            text-align: center;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .back-button {
@@ -27,15 +46,19 @@
             top: 20px;
             left: 20px;
             padding: 10px 20px;
-            background-color: #000000;
-            color: white;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            color: var(--text-color);
             text-decoration: none;
             border-radius: 10px;
             font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
         }
 
         .back-button:hover {
-            background-color: #DE3919;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(153, 69, 255, 0.3);
         }
 
         .conversation-container {
@@ -50,9 +73,9 @@
 
         .half-width-tab {
             flex: 1;
-            background-color: #fff;
+            background-color: var(--card-bg-color);
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 24px rgba(20, 241, 149, 0.1);
             padding: 20px;
             margin: 5px;
             min-width: 300px;
@@ -61,13 +84,28 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            border: 1px solid rgba(153, 69, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .half-width-tab:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px rgba(20, 241, 149, 0.2);
+            border: 1px solid var(--secondary-color);
+        }
+
+        .half-width-tab a {
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+            height: 100%;
         }
 
         .full-width-tab {
             width: calc(90% + 70px);
-            background-color: #fff;
+            background-color: var(--card-bg-color);
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 24px rgba(20, 241, 149, 0.1);
             padding: 20px;
             margin: 5px;
             min-height: 300px;
@@ -75,12 +113,14 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            border: 1px solid rgba(153, 69, 255, 0.2);
         }
 
         .tab h2 {
             margin: 0 0 10px;
             font-size: 1.5em;
-            color: #DE3919;
+            color: var(--header-color);
+            font-weight: 700;
         }
 
         .tab-content {
@@ -92,11 +132,51 @@
             align-items: center;
         }
 
+        .dynamic-content {
+            color: var(--text-color);
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
         #dynamic-image {
             max-width: 100%;
             max-height: 300px;
             border-radius: 10px;
-            display: none; /* Hide initially */
+            display: none;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            color: var(--text-color);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        button[innerText="Accept"] {
+            background: linear-gradient(to right, #14F195, #00C2FF);
+        }
+
+        button[innerText="Reject"] {
+            background: linear-gradient(to right, #FF3945, #FF9A3D);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(153, 69, 255, 0.3);
+        }
+
+        /* Glow effect for images */
+        img {
+            box-shadow: 0 0 15px rgba(20, 241, 149, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        img:hover {
+            box-shadow: 0 0 25px rgba(153, 69, 255, 0.5);
         }
     </style>
 </head>
