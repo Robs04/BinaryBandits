@@ -11,11 +11,11 @@
 - [x] pattern match keywords, noch verbesserungsfähig
 - [x] create prompt from pattern, noch verbessrungsfähig
 - [ ] write python parser for json file
-- [ ] graph plotter from info for front-end
 
 
 ## Christian:
 - [ ] Webpage interface
+- [ ] graph plotter from info for front-end
 
 
 ## Orell:
