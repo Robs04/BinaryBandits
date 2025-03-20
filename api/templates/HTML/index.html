@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wealth Management Overview</title>
+    <title>Client Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,47 +46,73 @@
         }
         
         .client-tab {
-            background-color: #000000;
+            background-color: #333;
             color: white;
-            width: 40px;
-            height: 150px;
-            padding: 20px 20px;
-            border-radius:30px;
-            text-decoration: none;
-            font-size: 42px;
-            flex: 1 1 calc(25% - 40px); /* max 4 tabs per row note that 35px refers to the gap between client tabs */
-            transition: background-color 0.3s ease;
-            box-sizing: border-box;
+            width: 180px;
+            height: 200px;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none; /* Remove underline */
+            transition: transform 0.2s, background-color 0.3s ease;
         }
+
 
         .client-tab:hover {
             background-color: #DE3919;
+            transform: scale(1.05);
         }
+
     </style>
 </head>
 <body>
-    <h1>Wealth Management Overview</h1>
+    <h1>Client Dashboard</h1>
     <div class="search-bar">
-        <input type="text" placeholder="Search for a client...">
+        <input type="text" id="searchInput" placeholder="Search for a client...">
     </div>
     <div class="client-tabs">
-        <a href="Clients\client1_conversation_interface.html" class="client-tab">client 1</a>
-        <a href="client2.html" class="client-tab">Client 2</a>
-        <a href="client3.html" class="client-tab">Client 3</a>
-        <a href="client4.html" class="client-tab">Client 4</a>
-        <a href="client5.html" class="client-tab">Client 5</a>
-        <a href="client6.html" class="client-tab">Client 6</a>
-        <a href="client7.html" class="client-tab">Client 7</a>
-        <a href="client8.html" class="client-tab">Client 8</a>
-        <a href="client9.html" class="client-tab">Client 9</a>
-        <a href="client10.html" class="client-tab">Client 10</a>
-        <a href="client11.html" class="client-tab">Client 11</a>
-        <a href="client12.html" class="client-tab">Client 12</a>
-        <a href="client13.html" class="client-tab">Client 13</a>
-        <a href="client14.html" class="client-tab">Client 14</a>
-        <a href="client15.html" class="client-tab">Client 15</a>
-        <a href="client16.html" class="client-tab">Client 16</a>
+        <a href="Clients\client1_conversation_interface.html" class="client-tab">Hans Müller</a>
+        <a href="client2.html" class="client-tab">John Doe</a>
+        <a href="client3.html" class="client-tab">Alice Smith</a>
+        <a href="client4.html" class="client-tab">Michael Brown</a>
+        <a href="client5.html" class="client-tab">Sarah Johnson</a>
+        <a href="client6.html" class="client-tab">David Lee</a>
+        <a href="client7.html" class="client-tab">Emma Wilson</a>
+        <a href="client8.html" class="client-tab">James Miller</a>
+        <a href="client9.html" class="client-tab">Olivia Taylor</a>
+        <a href="client10.html" class="client-tab">Ethan Martinez</a>
+        <a href="client11.html" class="client-tab">Sophia Garcia</a>
+        <a href="client12.html" class="client-tab">Benjamin Anderson</a>
+        <a href="client13.html" class="client-tab">Chloe Davis</a>
+        <a href="client14.html" class="client-tab">William Moore</a>
+        <a href="client15.html" class="client-tab">Ava Thompson</a>
+        <a href="client16.html" class="client-tab">Liam Harris</a>
+
         
     </div>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const clientTabs = document.querySelectorAll(".client-tab");
+    
+        searchInput.addEventListener("input", function() {
+            const filter = searchInput.value.toLowerCase();
+            
+            clientTabs.forEach(tab => {
+                const name = tab.textContent.toLowerCase();
+                if (name.includes(filter)) {
+                    tab.style.display = "flex"; // Show matching client
+                } else {
+                    tab.style.display = "none"; // Hide non-matching client
+                }
+            });
+        });
+    </script>
+    
 </body>
 </html>
