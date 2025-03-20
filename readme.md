@@ -2,8 +2,9 @@
 
 
 ## Robin:
-- [ ] Analysis of big changes in the market and extraction of those (to prepare for calls)
-- [ ] deliver infos about largest market changes using relevant news
+- [x] Analysis of big changes in the market and extraction of those (to prepare for calls)
+- [x] deliver infos about largest market changes using relevant news
+- [ ] passing data in a nice way to front end
 
 
 ## Vale:
