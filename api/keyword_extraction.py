@@ -162,6 +162,6 @@ def process_text(text, socketio):
             unlcean_json = prompt(item[1])
             clean_json = process_financial_json(extract_item_from_tool_response(unlcean_json))
             print(clean_json)
-            socketio.emit('update_data', {'data': item[1]})
+            plot.generate_stock_plot_from_json(clean_json,socketio,item[0])
             return
             #give data to front end

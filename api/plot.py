@@ -1,37 +1,47 @@
-import io
-import base64
+import json
 import pandas as pd
 import mplfinance as mpf
-from flask import Flask, jsonify
-from flask_socketio import SocketIO
+import io
+import base64
 
-def generate_stock_plot(dates, opens, closes, highs, lows):
-    """ Generates a stock price chart and returns it as a base64 string. """
-    data = pd.DataFrame({
-        'Date': pd.to_datetime(dates),
-        'Open': opens,
-        'Close': closes,
-        'High': highs,
-        'Low': lows
-    })
-    data.set_index('Date', inplace=True)
-
-    fig, ax = mpf.plot(data, type='candle', style='charles', returnfig=True)
+def generate_stock_plot_from_json(json_text,socketio,title):
+    """Takes a JSON string with numbered keys, maps them to meaningful names, generates a stock price chart, and returns it as a base64-encoded image."""
     
+    # Parse the JSON text
+    stock_data = json.loads(json_text)
+
+    # Define the correct column mapping
+    column_mapping = {
+        "0": "Date",   # Timestamp
+        "1": "Open",   # Opening price
+        "2": "Close",  # Closing price
+        "3": "High",   # Highest price
+        "4": "Low"     # Lowest price
+    }
+
+    # Convert list of numbered dicts into DataFrame with correct column names
+    df = pd.DataFrame(stock_data)
+    df.rename(columns=column_mapping, inplace=True)
+
+    # Ensure 'Date' column is in datetime format
+    df["Date"] = pd.to_datetime(df["Date"])
+
+    # Set 'Date' as the index for mplfinance
+    df.set_index("Date", inplace=True)
+
+    # Debugging: Print column names and first few rows
+    print(title, df.columns)
+    print(df.head())
+    # Generate the candlestick chart
+    fig, ax = mpf.plot(df, type='candle', style='charles', returnfig=True)
+    ax[0].set_title(title)
+
+    # Save the plot to a BytesIO buffer
     img_io = io.BytesIO()
-    fig.savefig(img_io, format='png', bbox_inches="tight")
+    fig.savefig(img_io, format="png", bbox_inches="tight")
     img_io.seek(0)
-    
-    encoded_img = base64.b64encode(img_io.read()).decode('utf-8')
+
+    # Convert image to base64 string
+    encoded_img = base64.b64encode(img_io.read()).decode("utf-8")
+    socketio.emit('update_data', {'data': encoded_img})
     return encoded_img
-
-# Example usage
-'''
-dates = pd.date_range(start="2024-10-01", periods=45).strftime('%Y-%m-%d').tolist()
-opens = [100 + i * 0.5 for i in range(45)]
-closes = [o + (1 if i % 2 == 0 else -1) for i, o in enumerate(opens)]
-highs = [c + 1.5 for c in closes]
-lows = [o - 1.5 for o in opens]
-
-plot_stock_chart(dates, opens, closes, highs, lows)
-'''

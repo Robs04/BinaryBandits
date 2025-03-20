@@ -73,7 +73,8 @@
             min-height: 300px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
         }
 
         .tab h2 {
@@ -86,11 +87,16 @@
             flex: 1;
             margin-top: 10px;
             overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .dynamic-content {
-            color: #333;
-            font-size: 1.2em;
+        #dynamic-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+            display: none; /* Hide initially */
         }
     </style>
 </head>
@@ -118,48 +124,100 @@
 
         <div class="full-width-tab">
             <h2>Dynamic Info</h2>
-            <div class="tab-content">
-                <p id="speach_dynamic-content">Waiting for dynamic data...</p>
+            <div id="tab-content">
+                <img id="dynamic-image" alt="Dynamic content" />
             </div>
         </div>
     </div>
 
-    <!-- Add the Socket.IO client-side script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
     <script>
         async function callBackend() {
             try {
                 const response = await fetch('/Clients/run');
                 const data = await response.json();
-                document.getElementById("speach_dynamic-content").innerText = data.message;
-                con
+                updateImage(data.image_url);
             } catch (error) {
                 console.error("Error calling backend:", error);
             }
         }
 
-        window.onload = callBackend;
-    </script>
-    
-    <script type="text/javascript">
-        // Connect to the Socket.IO server
-        var socket = io.connect('http://' + document.domain + ':' + location.port);
-
-        // Listen for the 'update_data' event from the server
-        socket.on('update_data', function(data) {
-            console.log("Received data:", data);
-
-            // Get the 'speach_dynamic-content' element
-            var dynamicContent = document.getElementById('speach_dynamic-content');
-
-            // Update the content of the <p> element with the received data
-            if (data && data.data) {
-                console.log(socket);
-                dynamicContent.innerHTML = JSON.stringify(data.data);  // Or use any other way to format it
+        function updateImage(imageUrl) {
+            const imageElement = document.getElementById("dynamic-image");
+            if (imageUrl) {
+                imageElement.src = imageUrl;
+                imageElement.style.display = "block";
             } else {
-                dynamicContent.innerHTML = 'No data received.';
+                imageElement.style.display = "none";
             }
+        }
+
+        window.onload = callBackend;
+
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+var imageContainer = document.getElementById("tab-content"); // Get container for images
+socket.on('update_data', function(data) {
+    console.log("Received Base64 image data:", data);
+
+    if (data && data.data) {
+        // Create a new div for the image and buttons
+        const imageWrapper = document.createElement("div");
+        imageWrapper.style.display = "flex";
+        imageWrapper.style.flexDirection = "column";
+        imageWrapper.style.alignItems = "center";
+        imageWrapper.style.marginBottom = "10px";
+
+        // Create the image element
+        const newImage = document.createElement("img");
+        newImage.src = "data:image/png;base64," + data.data;
+        newImage.style.maxWidth = "500px";
+        newImage.style.maxHeight = "500px";
+        newImage.style.margin = "5px";
+        newImage.style.borderRadius = "10px";
+
+        // Create Accept button
+        const acceptButton = document.createElement("button");
+        acceptButton.innerText = "Accept";
+        acceptButton.style.margin = "5px";
+        acceptButton.style.padding = "5px 10px";
+        acceptButton.style.backgroundColor = "#4CAF50";
+        acceptButton.style.color = "white";
+        acceptButton.style.border = "none";
+        acceptButton.style.borderRadius = "5px";
+        acceptButton.style.cursor = "pointer";
+
+        // Create Reject button
+        const rejectButton = document.createElement("button");
+        rejectButton.innerText = "Reject";
+        rejectButton.style.margin = "5px";
+        rejectButton.style.padding = "5px 10px";
+        rejectButton.style.backgroundColor = "#DE3919";
+        rejectButton.style.color = "white";
+        rejectButton.style.border = "none";
+        rejectButton.style.borderRadius = "5px";
+        rejectButton.style.cursor = "pointer";
+
+        // Event listener for Accept button
+        acceptButton.addEventListener("click", function() {
+            acceptButton.style.display = "none";
+            rejectButton.style.display = "none";
         });
+
+        // Event listener for Reject button
+        rejectButton.addEventListener("click", function() {
+            imageContainer.removeChild(imageWrapper);
+        });
+
+        // Append image and buttons to wrapper
+        imageWrapper.appendChild(newImage);
+        imageWrapper.appendChild(acceptButton);
+        imageWrapper.appendChild(rejectButton);
+
+        // Append wrapper to image container
+        imageContainer.appendChild(imageWrapper);
+    }
+});
+
     </script>
 </body>
 </html>
