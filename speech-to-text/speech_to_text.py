@@ -1,4 +1,4 @@
-# Used libraries: SpeechRecognition 3.14.1, 
+# Used libraries: SpeechRecognition 3.14.1
 # brew install portaudio
 # pip install SpeechRecognition
 # pip install pyaudio
