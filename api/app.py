@@ -24,10 +24,19 @@ def testAPI():
 def client():
     return render_template("/Clients/client1_conversation_interface.html")
 
-@app.route('/api/data', methods=['GET'])
+@app.route('/Clients/api/data', methods=['GET'])
 def get_data():
     # Return data as JSON
     return jsonify(data)
+
+@app.route('/Clients/client1_financial_roadmap')
+def getfinancialR():
+    return render_template("/Clients/client1_financial_roadmap.html")
+
+@app.route('/Clients/client1_portfolio_overview')
+def getPortOverview():
+    return render_template("/Clients/client1_portfolio_overview.html")
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5500)
