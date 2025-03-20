@@ -1,11 +1,11 @@
-#2 TODO unasigned:
+### TODO unasigned:
 - [ ] ...
 
-#2 Robin:
+# Robin:
 - [ ] Analysis of big changes in the market and extraction of those (to prepare for calls)
 
 
-#2 Vale:
+## Vale:
 - [ ] Keyword extraction from text
 
 
