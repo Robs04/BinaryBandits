@@ -162,5 +162,6 @@ def process_text(text, socketio):
             unlcean_json = prompt(item[1])
             clean_json = process_financial_json(extract_item_from_tool_response(unlcean_json))
             print(clean_json)
-            socketio.emit('update_data', {'data': clean_json})
+            socketio.emit('update_data', {'data': item[1]})
+            return
             #give data to front end

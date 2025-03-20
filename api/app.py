@@ -47,8 +47,15 @@ def getPortOverview():
 
 @app.route('/Clients/run', methods=['GET'])
 def execute():
-    keyword_extraction.process_text("tesla",socketio)
-        
+    counter = 0
+    while(1):
+        if counter == 0:
+            keyword_extraction.process_text("tesla",socketio)
+        if counter == 1:
+            keyword_extraction.process_text("Google",socketio)
+        if counter == 2:
+            keyword_extraction.process_text("Nvidia",socketio)
+        counter = (counter + 1) % 3
 
 if __name__ == '__main__':
     socketio.run(app)
