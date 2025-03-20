@@ -1,7 +1,7 @@
-### TODO unasigned:
+## TODO unasigned:
 - [ ] ...
 
-# Robin:
+## Robin:
 - [ ] Analysis of big changes in the market and extraction of those (to prepare for calls)
 
 
@@ -9,10 +9,10 @@
 - [ ] Keyword extraction from text
 
 
-#2 Christian:
+## Christian:
 - [ ] Webpage interface
 
 
-#2 Orell:
+## Orell:
 - [x] Voice to text in realtime
 - [ ] RESTful API
