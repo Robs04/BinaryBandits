@@ -1,2 +1,8 @@
 What problems are we trying to solve:
-    Pure Text in Text out 
+    - Pure Text in Text out is slow and unintuitive
+    - Wealth managers need fast and responsive way to react to client calls
+
+How do we solve the problems:
+    - We connect the phone calls directly to the AI
+    - We predict what clients might ask based on the current market and the portfolio of the clients
+    - We give the Advisors a quick overview over current market developments
