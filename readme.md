@@ -6,7 +6,9 @@
 
 
 ## Vale:
-- [ ] Keyword extraction from text
+- [x] Keyword extraction from text
+- [ ] pattern match keywords
+- [ ] create prompt from pattern
 
 
 ## Christian:
