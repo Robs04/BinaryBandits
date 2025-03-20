@@ -1,5 +1,5 @@
 ## TODO unasigned:
-- [ ] write python parser for json file
+- [ ] write python parser for json file -> vale
 - [ ] graph plotter from info
 
 ## Robin:
@@ -8,8 +8,8 @@
 
 ## Vale:
 - [x] Keyword extraction from text
-- [ ] pattern match keywords
-- [ ] create prompt from pattern
+- [x] pattern match keywords, noch verbesserungsfähig
+- [x] create prompt from pattern, noch verbessrungsfähig
 
 
 ## Christian:
