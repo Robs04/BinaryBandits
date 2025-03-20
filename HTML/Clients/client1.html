@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client 1 Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            background-color: #DE3919;
+            color: white;
+            padding: 20px 40px;
+            margin: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab:hover {
+            background-color: #B92E17;
+        }
+
+        .tab.active {
+            background-color: #A32614;
+        }
+
+        .content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            min-height: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #DE3919;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #B92E17;
+        }
+    </style>
+    <script>
+        function showContent(tabName) {
+            const contents = document.querySelectorAll('.content');
+            const tabs = document.querySelectorAll('.tab');
+            contents.forEach(content => content.style.display = 'none');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabName).style.display = 'block';
+            document.querySelector(`[onclick="showContent('${tabName}')"]`).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <h1>Client 1 Overview</h1>
+    <div class="tab-container">
+        <div class="tab active" onclick="showContent('preferences')">Preferences</div>
+        <div class="tab" onclick="showContent('goal-tracker')">Goal Tracker</div>
+        <div class="tab" onclick="location.href='client1_conversation_interface.html'">Conversation Interface</div>
+    </div>
+    <div id="preferences" class="content" style="display: block;">
+        <h2>Preferences</h2>
+        <p>Client preferences and investment choices will be shown here.</p>
+    </div>
+    <div id="goal-tracker" class="content" style="display: none;">
+        <h2>Goal Tracker</h2>
+        <p>Track progress towards client financial goals.</p>
+    </div>
+    <button class="back-button" onclick="location.href='../index.html'">Back to Home</button>
+</body>
+</html>

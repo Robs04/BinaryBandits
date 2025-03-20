@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client 1 - Conversation Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .back-button {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #DE3919;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1em;
+        }
+
+        .back-button:hover {
+            background-color: #c3301a;
+        }
+
+        .conversation-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: stretch;
+            margin-top: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 5px;
+            max-width: 30%;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tab h2 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+            color: #DE3919;
+        }
+
+        .tab-content {
+            flex: 1;
+            margin-top: 10px;
+            overflow-y: auto;
+        }
+
+        .dynamic-content {
+            color: #333;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <a href="../clients/client1.html" class="back-button">Back to Client 1 Overview</a>
+    <h1>Client 1 - Conversation Interface</h1>
+    <div class="conversation-container">
+        <div class="tab">
+            <h2>Prediction</h2>
+            <div class="tab-content">
+                <p class="dynamic-content">Predicted topics the client might want to discuss will be displayed here.</p>
+            </div>
+        </div>
+
+        <div class="tab">
+            <h2>News</h2>
+            <div class="tab-content">
+                <p class="dynamic-content">Latest market news and special reports will be displayed here.</p>
+            </div>
+        </div>
+
+        <div class="tab">
+            <h2>Dynamic Info</h2>
+            <div class="tab-content">
+                <p class="dynamic-content">Relevant data related to the conversation (e.g., Tesla stock info) will appear here.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
