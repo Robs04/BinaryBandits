@@ -21,4 +21,4 @@
 ## Orell:
 - [x] Voice to text in realtime
 - [x] API to connect backend with frontend
-- [ ] Mockup Clients
+- [x] Mockup Clients
