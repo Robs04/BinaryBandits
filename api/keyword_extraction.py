@@ -29,6 +29,7 @@ assets = {
     "growth stocks": "Vanguard Growth ETF (VUG)",
     "value stocks": "Vanguard Value ETF (VTV)",
     "top tech": "APPL NVDA MSFT AVGO",
+    "google": "GOOG",
     "apple": "AAPL",
     "tesla": "TSLA",
     "nvidia": "NVDA",
@@ -128,7 +129,8 @@ def get_best_match(phrase):
 
     # Get the asset name
     result = assets.get(best_match, "No relevant match found")
-
+    if best_score < 70:
+        return None
 
     # Return time component separately if found
     if time_quantity:
@@ -157,11 +159,11 @@ def process_text(text, socketio):
     match = [(item, best) for item in important_nouns if (best := get_best_match(item)) is not None]
     for item in match: 
         if 1: #ask if you want the data
-            print(item[0])
+            print(item[1])
             #print(item[1])
             unlcean_json = prompt(item[1])
             clean_json = process_financial_json(extract_item_from_tool_response(unlcean_json))
             print(clean_json)
-            plot.generate_stock_plot_from_json(clean_json,socketio,item[0])
+            plot.generate_stock_plot_from_json(clean_json,socketio,item[1])
             return
             #give data to front end
