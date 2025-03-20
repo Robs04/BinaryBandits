@@ -48,8 +48,5 @@ def process_financial_json(raw_json):
             values["low"],
             values["close"],
         )
-
-    return pd.DataFrame(
-        map(extract_values, composite_data.items()),
-        columns=["Date", "Open", "High", "Low", "Close"]
-    )
+    df = pd.DataFrame(map(extract_values, composite_data.items()))
+    return df.to_json(orient="records", date_format="iso")

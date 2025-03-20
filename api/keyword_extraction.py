@@ -18,7 +18,6 @@ from parser import *
 import plot
 
 
-
 nlp = spacy.load("en_core_web_sm")
 assets = {
     "nasdaq": "Nasdaq-100 ETF (QQQ)",
@@ -161,24 +160,7 @@ def process_text(text, socketio):
             print(item[0])
             #print(item[1])
             unlcean_json = prompt(item[1])
-<<<<<<< HEAD
             clean_json = process_financial_json(extract_item_from_tool_response(unlcean_json))
             print(clean_json)
             socketio.emit('update_data', {'data': clean_json})
             #give data to front end
-
-
-process_text("Tesla stock, google stock")
-=======
-            #print(unlcean_json)
-            return  process_financial_json(extract_item_from_tool_response(unlcean_json))
->>>>>>> f49efc7dce38504226c14be3e8160c96201a9158
-
-df = process_text("tesla")
-plot.plot_stock_chart(
-    df["Date"].tolist(), 
-    df["Open"].tolist(), 
-    df["Close"].tolist(), 
-    df["High"].tolist(), 
-    df["Low"].tolist()
-)

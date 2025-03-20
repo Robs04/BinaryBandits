@@ -1,6 +1,14 @@
 from flask import Flask, render_template, jsonify
+from flask_socketio import SocketIO, emit
+import speech_to_text
+import spacy
+from spacy.cli import download
+import nltk
+import keyword_extraction
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 
 # Sample data to return
 data = [
@@ -37,6 +45,10 @@ def getfinancialR():
 def getPortOverview():
     return render_template("/Clients/client1_portfolio_overview.html")
 
+@app.route('/Clients/run', methods=['GET'])
+def execute():
+    keyword_extraction.process_text("tesla",socketio)
+        
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5500)
+    socketio.run(app)

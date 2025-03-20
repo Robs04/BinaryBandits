@@ -99,29 +99,67 @@
     <h1>Client 1 - Conversation Interface</h1>
     <div class="conversation-container">
         <div class="half-width-tab">
-            <a href = "/Clients/client1_portfolio_overview">
+            <a href="/Clients/client1_portfolio_overview">
                 <h2>Portfolio Overview</h2>
                 <div class="tab-content">
                     <p class="dynamic-content">Predicted topics the client might want to discuss will be displayed here.</p>
                 </div>
-            <a>
+            </a>
         </div>
 
         <div class="half-width-tab">
-            <a href = "/Clients/client1_financial_roadmap">
+            <a href="/Clients/client1_financial_roadmap">
                 <h2>Financial Roadmap</h2>
                 <div class="tab-content">
                     <p class="dynamic-content">Displays goals and tracks where client stands in that respect - additionally preferences are listed.</p>
                 </div>
-            <a>
+            </a>
         </div>
 
         <div class="full-width-tab">
             <h2>Dynamic Info</h2>
             <div class="tab-content">
-                <p class="dynamic-content">Relevant data related to the conversation (e.g., Tesla stock info) will appear here. Initially it will make multiple suggestions using news and portfolio, preferences... </p>
+                <p id="speach_dynamic-content">Waiting for dynamic data...</p>
             </div>
         </div>
     </div>
+
+    <!-- Add the Socket.IO client-side script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+        async function callBackend() {
+            try {
+                const response = await fetch('/Clients/run');
+                const data = await response.json();
+                document.getElementById("speach_dynamic-content").innerText = data.message;
+                con
+            } catch (error) {
+                console.error("Error calling backend:", error);
+            }
+        }
+
+        window.onload = callBackend;
+    </script>
+    
+    <script type="text/javascript">
+        // Connect to the Socket.IO server
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        // Listen for the 'update_data' event from the server
+        socket.on('update_data', function(data) {
+            console.log("Received data:", data);
+
+            // Get the 'speach_dynamic-content' element
+            var dynamicContent = document.getElementById('speach_dynamic-content');
+
+            // Update the content of the <p> element with the received data
+            if (data && data.data) {
+                console.log(socket);
+                dynamicContent.innerHTML = JSON.stringify(data.data);  // Or use any other way to format it
+            } else {
+                dynamicContent.innerHTML = 'No data received.';
+            }
+        });
+    </script>
 </body>
 </html>
