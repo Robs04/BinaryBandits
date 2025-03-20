@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wealth Management Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /*height: 100vh;*/
+        }
+
+        h1 {
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .search-bar {
+            /*margin-bottom: 10px;*/
+            margin-top: 30px;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            width: 300px;
+            font-size: 18px;
+            border-radius: 20px;
+            border: 2px solid #ddd;
+            margin-bottom: 40px;
+        }
+        
+        .client-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 100px;
+        }
+        
+        .client-tab {
+            background-color: #000000;
+            color: white;
+            width: 40px;
+            height: 150px;
+            padding: 20px 20px;
+            border-radius:30px;
+            text-decoration: none;
+            font-size: 42px;
+            flex: 1 1 calc(25% - 40px); /* max 4 tabs per row note that 35px refers to the gap between client tabs */
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .client-tab:hover {
+            background-color: #DE3919;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Function to fetch data from Flask API and display it in HTML
+        function fetchData() {
+            fetch('api/data')  // Fetch data from Flask API (relative path works because the frontend and API are served by Flask)
+                .then(response => response.json())  // Convert the response to JSON
+                .then(data => {
+                    let displayData = '';  // Variable to hold the HTML content
+
+                    // Loop through each item in the data array
+                    data.forEach(item => {
+                        displayData += `<div>
+                                            <h3>${item.name}</h3>
+                                            <p>Age: ${item.age}</p>
+                                          </div>`;
+                    });
+
+                    // Insert the data into the HTML container
+                    document.getElementById('data-container').innerHTML = displayData;
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('data-container').innerHTML = 'Failed to load data.';
+                });
+        }
+
+        // Fetch data when the page loads
+        window.onload = fetchData;
+    </script>
+    <div id="data-container">
+        <!-- Data from Flask API will be displayed here -->
+    </div>
+    <h1>Wealth Management Overview</h1>
+    <div class="search-bar">
+        <input type="text" placeholder="Search for a client...">
+    </div>
+    <div class="client-tabs">
+        <a href="/Clients/client1_conversation_interface" class="client-tab">client 1</a>
+        <a href="client2.html" class="client-tab">Client 2</a>
+        <a href="client3.html" class="client-tab">Client 3</a>
+        <a href="client4.html" class="client-tab">Client 4</a>
+        <a href="client5.html" class="client-tab">Client 5</a>
+        <a href="client6.html" class="client-tab">Client 6</a>
+        <a href="client7.html" class="client-tab">Client 7</a>
+        <a href="client8.html" class="client-tab">Client 8</a>
+        <a href="client9.html" class="client-tab">Client 9</a>
+        <a href="client10.html" class="client-tab">Client 10</a>
+        <a href="client11.html" class="client-tab">Client 11</a>
+        <a href="client12.html" class="client-tab">Client 12</a>
+        <a href="client13.html" class="client-tab">Client 13</a>
+        <a href="client14.html" class="client-tab">Client 14</a>
+        <a href="client15.html" class="client-tab">Client 15</a>
+        <a href="client16.html" class="client-tab">Client 16</a>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client 1 - Conversation Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #000000;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1em;
+        }
+
+        .back-button:hover {
+            background-color: #DE3919;
+        }
+
+        .conversation-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: stretch;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .half-width-tab {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 5px;
+            min-width: 300px;
+            max-width: 45%;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .full-width-tab {
+            width: calc(90% + 70px);
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 5px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tab h2 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+            color: #DE3919;
+        }
+
+        .tab-content {
+            flex: 1;
+            margin-top: 10px;
+            overflow-y: auto;
+        }
+
+        .dynamic-content {
+            color: #333;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-button">Home</a>
+    <h1>Client 1 - Conversation Interface</h1>
+    <div class="conversation-container">
+        <div class="half-width-tab">
+            <h2>Portfolio Overview</h2>
+            <div class="tab-content">
+                <p class="dynamic-content">Predicted topics the client might want to discuss will be displayed here.</p>
+            </div>
+        </div>
+
+        <div class="half-width-tab">
+            <h2>Financial Roadmap</h2>
+            <div class="tab-content">
+                <p class="dynamic-content">Displays goals and tracks where client stands in that respect - additionally preferences are listed.</p>
+            </div>
+        </div>
+
+        <div class="full-width-tab">
+            <h2>Dynamic Info</h2>
+            <div class="tab-content">
+                <p class="dynamic-content">Relevant data related to the conversation (e.g., Tesla stock info) will appear here. Initially it will make multiple suggestions using news and portfolio, preferences... </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
