@@ -1,5 +1,6 @@
 ## TODO unasigned:
-- [ ] ...
+- [ ] write python parser for json file
+- [ ] graph plotter from info
 
 ## Robin:
 - [ ] Analysis of big changes in the market and extraction of those (to prepare for calls)
